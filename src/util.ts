@@ -2,20 +2,73 @@
 
 import * as dns from "dns";
 import * as fs from "fs";
+import * as hostile from 'hostile';
+import * as child_process from 'child_process';
 
 export class Util{
-    public static resolve(domain: string, server: string){
+    public static unique(arr:any[]): any[]{
+        return arr.filter(function(item, pos){
+            return arr.indexOf(item) == pos;
+        })
+    }
+
+    private static _resolve(domain: string, server: string){
         return new Promise<any>((resolve, reject)=>{
-            var dservers = dns.getServers();
+            let dservers = dns.getServers();
             dns.setServers([server]);
             dns.resolve4(domain, (err, add)=>{
-                setTimeout(()=>{dns.setServers(dservers)})
+                setTimeout(()=>{
+                    dns.setServers(dservers);
+                    if(err){
+                        reject(err)
+                    }else{
+                        resolve(add);
+                    }    
+                })
+            });
+        });
+    }
+
+    public static async resolve(domain: string, servers: string[]){
+        let res = [];
+        for(let i = 0; i < servers.length; i ++){
+            let tmp = await this._resolve(domain, servers[i]);
+            tmp.forEach(e => {
+                res.push(e);
+            });
+        }
+        return this.unique(res);
+    }
+
+    public static _wget(domain: string, ip: string, types: string[]){
+        return new Promise<any>((resolve, reject)=>{
+            hostile.set(ip, domain, (err)=>{
                 if(err){
-                    reject(err)
+                    resolve({
+                        error: err,
+                        ip: ip,
+                        domain: domain
+                    })
                 }else{
-                    resolve(add);
+                    let error = "";
+                    let cmd = 'wget -m -nd -A '+ types.join(',') + '-P ./tmp/' + domain + '@' + ip + ' ' + domain;
+                    child_process.exec(cmd, {timeout: 30000}, (err, stdout, stderr)=>{  
+                        hostile.remove(ip, domain, (error)=>{
+                            resolve({
+                                error: err.toString() + error,
+                                ip: ip,
+                                domain: domain
+                            })
+                        });
+                    })
                 }
             });
         });
+    }
+
+    public static async wget(domain: string, ip: string[], types: string[]){
+        for(var i = 0; i < ip.length; i ++){
+            await this._wget(domain, ip[i], types);
+        }
     }
 }

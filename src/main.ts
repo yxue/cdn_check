@@ -4,7 +4,7 @@ export function main(){
 
 }
 
-export function test(){
+export async function test(){
 
 }
 
