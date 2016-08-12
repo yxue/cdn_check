@@ -10,9 +10,9 @@ npm install cdn-check
 
 ## Usage
 ```js
-const check = require('cdn-check');
+const cdnck = require('cdn-check');
 
-var res = check('0.0.0.0', 'a.b.c', ['1.1.1.1', '2.2.2.2'], ['html', 'css', 'js'])
+var res = cdnck.check('0.0.0.0', 'a.b.c', ['1.1.1.1', '2.2.2.2'], ['html', 'css', 'js'])
 
 ```
 
