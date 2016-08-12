@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const util_1 = require('./util');
 const fs = require('fs');
 const path = require('path');
-function main(ip, domain, dservers, types) {
+function check(ip, domain, dservers, types) {
     return __awaiter(this, void 0, void 0, function* () {
         let cservers = yield util_1.Util.resolve(domain, dservers);
         cservers.push(ip);
@@ -27,4 +27,4 @@ function main(ip, domain, dservers, types) {
         return res;
     });
 }
-exports.main = main;
+exports.check = check;
