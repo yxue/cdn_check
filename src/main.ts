@@ -2,7 +2,7 @@ import {Util} from './util';
 import * as fs from 'fs';
 import * as path from 'path';
 
-export async function main(ip: string, domain: string, dservers: string[], types: string[]){
+export async function check(ip: string, domain: string, dservers: string[], types: string[]){
     let cservers = await Util.resolve(domain, dservers);
     cservers.push(ip);
     await Util.wget(domain, cservers, types);

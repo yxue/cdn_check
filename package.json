@@ -1,6 +1,6 @@
 {
   "name": "cdn-check",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Check contents between cdn and host",
   "main": "./dist/main.js",
   "scripts": {
@@ -17,10 +17,12 @@
   },
   "homepage": "https://github.com/xueyanSEU/cdn_check#readme",
   "dependencies": {
+    "hostile": "^1.0.3",
+    "md5-file": "^3.1.1"
+  },
+  "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-typescript": "^2.13.6",
-    "hostile": "^1.0.3",
-    "md5-file": "^3.1.1",
     "typings": "^1.3.2"
   }
 }

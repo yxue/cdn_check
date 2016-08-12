@@ -24,27 +24,7 @@ function main(ip, domain, dservers, types) {
             console.log(tmp);
             tmp.forEach(t => res.push(t));
         });
-        console.log(res);
         return res;
     });
 }
 exports.main = main;
-function test() {
-    return __awaiter(this, void 0, void 0, function* () {
-        //var res = await Util.resolve('m.escort.ford.com.cn', ['182.90.252.10', '111.50.74.180', '211.139.73.34']);
-        //console.log(res);
-        //await Util.wget('m.escort.ford.com.cn', res, ['html','css','js']);
-        //let domain = 'm.escort.ford.com.cn';
-        //let ip = '111.20.249.7';
-        //let host = ['tmp', domain+'@'+ip].join(path.sep);
-        //let files = fs.readdirSync('tmp');
-        //files.forEach(file=>{
-        //    let cdn = ['tmp', file].join(path.sep);
-        //    let tmp = Util.dircmp(host, cdn);
-        //    console.log(tmp);
-        //});
-    });
-}
-exports.test = test;
-//test();
-main('139.219.140.69', 'm.escort.ford.com.cn', ['182.90.252.10', '111.50.74.180', '211.139.73.34'], ['html', 'css', 'js']);
