@@ -1,5 +1,5 @@
 {
-  "name": "cdn_check",
+  "name": "cdn-check",
   "version": "1.0.0",
   "description": "Check contents between cdn and host",
   "main": "./dist/main.js",
