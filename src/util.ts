@@ -33,6 +33,7 @@ export class Util{
         let res = [];
         for(let i = 0; i < servers.length; i ++){
             let tmp = await this._resolve(domain, servers[i]);
+            console.log(tmp);
             tmp.forEach(e => {
                 res.push(e);
             });
@@ -51,11 +52,12 @@ export class Util{
                     })
                 }else{
                     let error = "";
-                    let cmd = 'wget -m -nd -A '+ types.join(',') + '-P ./tmp/' + domain + '@' + ip + ' ' + domain;
+                    let cmd = 'wget -m -nd -A '+ types.join(',') + ' -P ./tmp/' + domain + '@' + ip + ' ' + domain;
+                    console.log(cmd);
                     child_process.exec(cmd, {timeout: 30000}, (err, stdout, stderr)=>{  
                         hostile.remove(ip, domain, (error)=>{
                             resolve({
-                                error: err.toString() + error,
+                                error: error,
                                 ip: ip,
                                 domain: domain
                             })
@@ -71,4 +73,9 @@ export class Util{
             await this._wget(domain, ip[i], types);
         }
     }
+    
+    public static dircmp(dir1: string, dir2: string){
+        let res = [];
+    }
+
 }
