@@ -86,17 +86,17 @@ export class Util{
         files.forEach(file=>{
             let name1 = [dir1, file].join(sep);
             let name2 = [dir2, file].join(sep);
-
+            
             let stats = fs.statSync(name1);
             if(stats.isFile()){
                 try {
                     if(fs.statSync(name2).isFile()){
-                        if(md5file.sync(name1) != md5file(name2)){
-                            res.push([{
+                        if(md5file.sync(name1) != md5file.sync(name2)){
+                            res.push({
                                 host: name1,
                                 cdn: name2,
                                 reason: 'MD5 Fail'
-                            }]);
+                            });
                         }
                     }else{
                         res.push({
