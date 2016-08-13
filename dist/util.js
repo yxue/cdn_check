@@ -111,7 +111,7 @@ class Util {
                         res.push({
                             host: name1,
                             cdn: name2,
-                            reason: 'Can\'t find file'
+                            reason: "Can't find file"
                         });
                     }
                 }
@@ -119,7 +119,7 @@ class Util {
                     res.push({
                         host: name1,
                         cdn: name2,
-                        reason: 'Can\'t find file'
+                        reason: "Can't find file"
                     });
                 }
             }
@@ -133,7 +133,7 @@ class Util {
                         res.push({
                             host: name1,
                             cdn: name2,
-                            reason: 'Can\'t find directory'
+                            reason: "Can't find directory"
                         });
                     }
                 }
@@ -141,7 +141,7 @@ class Util {
                     res.push({
                         host: name1,
                         cdn: name2,
-                        reason: 'Can\'t find directory'
+                        reason: "Can't find directory"
                     });
                 }
             }

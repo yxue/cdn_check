@@ -11,7 +11,7 @@ const util_1 = require('./util');
 const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
-function check(ip, domain, dservers, types) {
+function check(ip, domain, dservers, types, saveFile) {
     return __awaiter(this, void 0, void 0, function* () {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
             let cs = yield util_1.Util.resolve(domain, dservers);
@@ -25,7 +25,8 @@ function check(ip, domain, dservers, types) {
                 let tmp = util_1.Util.dircmp(host, cdn);
                 tmp.forEach(t => res.push(t));
             });
-            child_process.execSync('rm -r ./tmp');
+            if (!saveFile)
+                child_process.execSync('rm -r ./tmp');
             resolve(res);
         }));
     });

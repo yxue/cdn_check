@@ -12,7 +12,7 @@ npm install cdn-check
 ```js
 const cdnck = require('cdn-check');
 
-var p = cdnck.check('0.0.0.0', 'a.b.c', ['1.1.1.1', '2.2.2.2'], ['html', 'css', 'js'])
+var p = cdnck.check('0.0.0.0', 'a.b.c', ['1.1.1.1', '2.2.2.2'], ['html', 'css', 'js'], false)
 p.then((data)=>{
     // ... handle here    
 });
@@ -20,7 +20,7 @@ p.then((data)=>{
 
 ## API
 
-### `check(ip: string, domain: string, dnsip: string[], checktype: string[]) => Promise`
+### `check(ip: string, domain: string, dnsip: string[], checktype: string[], saveFile: boolean) => Promise`
 Get the differences between cdn servers and host server
 
 ### License

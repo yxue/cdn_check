@@ -3,7 +3,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as child_process from 'child_process';
 
-export async function check(ip: string, domain: string, dservers: string[], types: string[]){
+export async function check(ip: string, domain: string, dservers: string[], types: string[], saveFile: boolean){
     return new Promise<any>(async (resolve, reject)=>{
         let cs = await Util.resolve(domain, dservers);
         cs.push(ip);
@@ -16,7 +16,8 @@ export async function check(ip: string, domain: string, dservers: string[], type
             let tmp = Util.dircmp(host, cdn);
             tmp.forEach(t=>res.push(t));
         });
-        child_process.execSync('rm -r ./tmp');
+        if(!saveFile)
+            child_process.execSync('rm -r ./tmp');
         resolve(res);
     });
 }
