@@ -12,14 +12,16 @@ npm install cdn-check
 ```js
 const cdnck = require('cdn-check');
 
-var res = cdnck.check('0.0.0.0', 'a.b.c', ['1.1.1.1', '2.2.2.2'], ['html', 'css', 'js'])
-
+var p = cdnck.check('0.0.0.0', 'a.b.c', ['1.1.1.1', '2.2.2.2'], ['html', 'css', 'js'])
+p.then((data)=>{
+    // ... handle here    
+});
 ```
 
 ## API
 
-### `check(ip: string, domain: string, dnsip: string[], checktype: string[]) => string[]`
-Synchronously get the differences between cdn servers and host server
+### `check(ip: string, domain: string, dnsip: string[], checktype: string[]) => Promise`
+Get the differences between cdn servers and host server
 
 ### License
 

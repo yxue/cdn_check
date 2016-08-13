@@ -19,10 +19,11 @@ export class Util{
             let dservers = dns.getServers();
             dns.setServers([server]);
             dns.resolve4(domain, (err, add)=>{
+                if(err) console.log(err);
                 setTimeout(()=>{
                     dns.setServers(dservers);
                     if(err){
-                        reject(err)
+                        resolve([]);
                     }else{
                         resolve(add);
                     }    

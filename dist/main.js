@@ -10,21 +10,24 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const util_1 = require('./util');
 const fs = require('fs');
 const path = require('path');
+const child_process = require('child_process');
 function check(ip, domain, dservers, types) {
     return __awaiter(this, void 0, void 0, function* () {
-        let cservers = yield util_1.Util.resolve(domain, dservers);
-        cservers.push(ip);
-        yield util_1.Util.wget(domain, cservers, types);
-        let host = ['tmp', domain + '@' + ip].join(path.sep);
-        let files = fs.readdirSync('tmp');
-        let res = [];
-        files.forEach(file => {
-            let cdn = ['tmp', file].join(path.sep);
-            let tmp = util_1.Util.dircmp(host, cdn);
-            console.log(tmp);
-            tmp.forEach(t => res.push(t));
-        });
-        return res;
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            let cs = yield util_1.Util.resolve(domain, dservers);
+            cs.push(ip);
+            yield util_1.Util.wget(domain, cs, types);
+            let host = ['tmp', domain + '@' + ip].join(path.sep);
+            let files = fs.readdirSync('tmp');
+            let res = [];
+            files.forEach(file => {
+                let cdn = ['tmp', file].join(path.sep);
+                let tmp = util_1.Util.dircmp(host, cdn);
+                tmp.forEach(t => res.push(t));
+            });
+            child_process.execSync('rm -r ./tmp');
+            resolve(res);
+        }));
     });
 }
 exports.check = check;
